@@ -60,5 +60,4 @@ stop_img = Image.open("./temp/stop.png")
 stop = ImageTk.PhotoImage(stop_img)
 button_stop = Button(frame1, image=stop, command=root.quit, bd=0, bg="black")
 button_stop.pack()
-
 root.mainloop()
