@@ -14,7 +14,7 @@ def module_path():
 def getCenter(scr, app_width=600, app_height=400):
     width = scr.winfo_screenwidth()
     height = scr.winfo_screenheight()
-    print "{0}x{1}".format(width, height)
+    #print "{0}x{1}".format(width, height)
     return '{0}x{1}+{2}+{3}'.format(
         app_width,
         app_height,
@@ -24,15 +24,16 @@ def getCenter(scr, app_width=600, app_height=400):
     
 
 work_dir = module_path()
+print
 print work_dir
-
+print len(work_dir)
 
 root = Tk()
 root.config(bg="black")
 root.grid_columnconfigure(0, pad=0)
 root.grid_rowconfigure(0, pad=0) 
-root.title("<  GSSaveReader  >")
-root.overrideredirect(1)
+root.title("                <  GSSaveReader  >")
+#root.overrideredirect(1)
 root.geometry(
     getCenter(
         root,
