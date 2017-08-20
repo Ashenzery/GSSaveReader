@@ -1,8 +1,8 @@
 from cx_Freeze import setup, Executable
 
 setup(
-    name = "GSSaveReader",   #Name of exe file
-    version = "0.0.0.1", 
-    description = u"Удобное отображение вещей на персонажах",
-    executables = [Executable("main.py")]
+    name = 'GSSaveReader',   #Name of exe file
+    version = "0.0.0.2",
+    description = u'РЈРґРѕР±РЅС‹Р№ РїСЂРѕСЃРјРѕС‚СЂ РІР°С€РёС… СЃРѕС…СЂР°РЅРµРЅРёР№',
+    executables = [Executable('main.py')]
 )
