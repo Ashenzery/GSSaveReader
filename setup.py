@@ -2,7 +2,7 @@
 
 setup(
     name = 'GSSaveReader',   #Name of exe file
-    version = "0.0.0.5",
+    version = "0.0.0.6",
     description = u'Удобный просмотр ваших сохранений',
     executables = [Executable('main.py')]
 )
