@@ -7,32 +7,41 @@ from PIL import Image, ImageTk
 
 class GoblinButton:
     def __init__(self, name, y_pos, x_pos, root):
-        self.name = name
         self.frame = Frame(root, bd = 0, bg = "black")
         self.frame.place( y = y_pos, x = x_pos )
-        self.img = Image.open( "./temp/{0}.png".format(self.name) )
+        self.img = Image.open( "./temp/{0}.png".format(name) )
         self.image = ImageTk.PhotoImage( self.img )
         self.button = Button(
-         self.frame,
-         image = self.image,
-         command = self.new_window,
-         bd = 0,
-         bg = 'black' )
+            self.frame,
+            image = self.image,
+            command = self.new_window,
+            bd = 0,
+            bg = 'black' )
         self.button.pack( )
-        self.win = Toplevel( )
-        self.win.geometry( get_left_of(root) )
-        self.win.withdraw( )
-        self.win.overrideredirect( True )
-        self.win.title( self.name )
-        self.win.tkraise( )
+        self.window = GoblinWindow(name, root)
     def new_window(self):
-        self.win_state = self.win.state( )
-        if self.win_state == 'withdrawn':
-            self.win.deiconify( )
-        elif self.win_state == 'normal':
-            self.win.withdraw( )
+        self.window.win_state = self.window.win.state( )
+        if self.window.win_state == 'withdrawn':
+            self.window.win.deiconify( )
+        elif self.window.win_state == 'normal':
+            self.window.win.withdraw( )
         else:
             print(self.win_state)
+
+
+class GoblinWindow:
+    def __init__(self, name, root):
+        self.win = Toplevel( )
+        self.win.resizable(False, False)
+        self.background = Label(self.win , image = bg2, bd = 0 )
+        self.background.place( x = 0, y = 0 )
+        self.win.geometry( get_left_of(root, 733) )
+        self.win.withdraw( )
+        #TODO:
+        #self.win.overrideredirect( True )
+        self.win.title( name )
+        self.win.tkraise( )
+
 
 def module_path():
     if hasattr(sys, "frozen"):
@@ -81,11 +90,13 @@ print work_dir
 print len( work_dir )
 
 root = Tk( )
+root.resizable(False, False)
 root.config( bg="black" )
 root.grid_columnconfigure( 0, pad=0 )
 root.grid_rowconfigure( 0, pad=0 )
 root.title( ' < GSSaveReader > ' )
-root.overrideredirect( True )
+#TODO:
+#root.overrideredirect( True )
 root.tkraise( )
 root.geometry( get_right_down( root ) )
 
@@ -94,6 +105,10 @@ bg1_img = Image.open( "./temp/bg1.png" )
 bg1 = ImageTk.PhotoImage( bg1_img )
 label_background = Label( root, image = bg1, bd = 0 )
 label_background.place( x = 0, y = 0 )
+
+
+bg2_img = Image.open( "./temp/bg2.png" )
+bg2 = ImageTk.PhotoImage( bg2_img )
 
 
 stop_btm_frame = Frame( root, bd=0, bg="black" )
