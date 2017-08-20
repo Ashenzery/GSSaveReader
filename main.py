@@ -1,3 +1,6 @@
+# encoding: utf-8
+
+
 import os
 import sys
 
@@ -72,7 +75,7 @@ class GoblinWindow:
             'copy' : Button(
                                 self.win,
                                 image = images['copy'],
-                                #command = ,
+                                command = self.write,
                                 bd = 0,
                                 bg = 'black'  ),
         }
@@ -84,7 +87,9 @@ class GoblinWindow:
     def hide_all(self):
         for goblin in goblin_arr:
             goblin.window.win.withdraw( )
-
+    def write(self):
+        root.clipboard_clear()
+        root.clipboard_append('txt to write')
 
 def module_path():
     if hasattr(sys, "frozen"):
