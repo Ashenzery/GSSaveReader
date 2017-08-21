@@ -106,7 +106,7 @@ def get_right_down(scr, app_width=330, app_height=210):
         app_width,
         app_height,
         int( width - app_width),
-        int( height - app_height)
+        int( height - app_height) - 65
         #int( ( width / 2.0 ) - ( app_width / 2.0 ) ),
         #int( ( height / 2.0 ) - ( app_height / 2.0 ) ),
         )
@@ -133,9 +133,8 @@ def get_left_of(scr, app_width=733 , app_height=210 ):
     )
 
 work_dir = module_path( )
-print
+
 print work_dir
-print len( work_dir )
 
 root = Tk( )
 root.resizable(False, False)
