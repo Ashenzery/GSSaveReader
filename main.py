@@ -320,5 +320,8 @@ for goblin in gobins:
         goblin_arr.append(
             GoblinButton(goblin['name'], goblin['y'], goblin['x'], root)
                         )
-if __name__ == '_ _main__':
+if __name__ == '__main__' and work_dir.split("\\")[-3] == 'v1.3b':
     root.mainloop()
+else: 
+    print __name__
+    print work_dir.split("\\")[-3]
