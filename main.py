@@ -1,12 +1,13 @@
-# -*- coding: utf-8 -*-
-print 'TODO: '
+﻿# -*- coding: utf-8 -*-
+'''print 'TODO: '
 print '1) Добавить всплывющее сообение о том, что сейв скопирован при нажатии на кнопку "copy"'
 print '2) Изменить цвет названия предмета на цвет предмета'
 print '3) Исправить изображение temp/bg2.png'
-
+'''
 import os
 import sys
 
+from json import loads
 from Tkinter import *
 from PIL import Image, ImageTk
 
@@ -51,8 +52,7 @@ class GoblinWindow:
         self.background.place( x = 0, y = 0 )
         self.win.geometry( get_left_of(root) )
         self.win.withdraw()
-        #TODO:
-        #self.win.overrideredirect( True )
+        self.win.overrideredirect( not is_window )
         self.win.title( name )
         self.win.tkraise()
         self.buttons = {
@@ -94,14 +94,14 @@ class GoblinWindow:
         self.gold = '3000'
         self.date =  self.parser()
         self.labels = {
-            'lvl'   : MyLabel(self.win, 'Уровень: {0}'.format(self.date['lvl']['val']), y = 84, x = 250, font = 'comic-sans 7' ),
-            'gold'  : MyLabel(self.win, 'Золото: {0}'.format(self.date['gold']['val']), y = 84, x = 350, font = 'comic-sans 7' ),
-            'item1' : MyLabel(self.win, self.date['item1']['val'], y = 101, x= 250, color = self.date['item1']['color'] ),
-            'item2' : MyLabel(self.win, self.date['item2']['val'], y = 117, x= 250, color = self.date['item2']['color'] ),
-            'item3' : MyLabel(self.win, self.date['item3']['val'], y = 133, x= 250, color = self.date['item3']['color'] ),
-            'item4' : MyLabel(self.win, self.date['item4']['val'], y = 150, x= 250, color = self.date['item4']['color'] ),
-            'item5' : MyLabel(self.win, self.date['item5']['val'], y = 167, x= 250, color = self.date['item5']['color'] ),
-            'item6' : MyLabel(self.win, self.date['item6']['val'], y = 184, x= 250, color = self.date['item6']['color'] )
+            'lvl'   : MyLabel(self.win, 'Уровень: {0}'.format(self.date['lvl']['val']), y = 83, x = 280, font = 'comic-sans 8' ),
+            'gold'  : MyLabel(self.win, 'Золото: {0}'.format(self.date['gold']['val']), y = 83, x = 400, font = 'comic-sans 8' ),
+            'item1' : MyLabel(self.win, self.date['item1']['val'], y = 104, x= 250, color = self.date['item1']['color'] ),
+            'item2' : MyLabel(self.win, self.date['item2']['val'], y = 121, x= 250, color = self.date['item2']['color'] ),
+            'item3' : MyLabel(self.win, self.date['item3']['val'], y = 138, x= 250, color = self.date['item3']['color'] ),
+            'item4' : MyLabel(self.win, self.date['item4']['val'], y = 155, x= 250, color = self.date['item4']['color'] ),
+            'item5' : MyLabel(self.win, self.date['item5']['val'], y = 172, x= 250, color = self.date['item5']['color'] ),
+            'item6' : MyLabel(self.win, self.date['item6']['val'], y = 189, x= 250, color = self.date['item6']['color'] )
         }
 
 
@@ -215,7 +215,7 @@ def get_right_down(scr, app_width=330, app_height=210):
         app_width,
         app_height,
         int( width - app_width),
-        int( height - app_height)
+        int( height - app_height) - 40
         #int( ( width / 2.0 ) - ( app_width / 2.0 ) ),
         #int( ( height / 2.0 ) - ( app_height / 2.0 ) ),
         )
@@ -242,17 +242,17 @@ def get_left_of(scr, app_width=733 , app_height=210 ):
     )
 
 work_dir = module_path()
-print work_dir#, __name__
+print work_dir
 
-
+with open('./config.txt') as f:
+    is_window = loads( f.read() )['overrideredirect']
 root = Tk()
 root.resizable(False, False)
 root.config( bg='black' )
 root.grid_columnconfigure( 0, pad=0 )
 root.grid_rowconfigure( 0, pad=0 )
 root.title( ' < GSSaveReader > ' )
-#TODO:
-#root.overrideredirect( True )
+root.overrideredirect( not is_window )
 root.tkraise()
 root.geometry( get_right_down( root ) )
 
@@ -320,8 +320,5 @@ for goblin in gobins:
         goblin_arr.append(
             GoblinButton(goblin['name'], goblin['y'], goblin['x'], root)
                         )
-
-if __name__ == '__main__':
+if __name__ == '_ _main__':
     root.mainloop()
-else:
-    print '__name__ == ' + __name__
